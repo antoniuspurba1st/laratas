@@ -31,4 +31,17 @@ class Task extends Model
     protected $attributes = [
         'status' => self::STATUS_PENDING,
     ];
+
+    /**
+     * Get the available task statuses.
+     *
+     * @return list<string>
+     */
+    public static function statuses(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_COMPLETED,
+        ];
+    }
 }
