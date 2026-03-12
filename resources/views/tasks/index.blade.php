@@ -27,6 +27,27 @@
             </div>
         @endif
 
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form method="GET" action="{{ route('tasks.index') }}">
+                    <div class="form-row">
+                        <div class="col-md-10 mb-2 mb-md-0">
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ $search }}"
+                                class="form-control"
+                                placeholder="Search tasks by title"
+                            >
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-primary btn-block">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="card shadow-sm">
             <div class="card-body p-0">
                 <div class="table-responsive">

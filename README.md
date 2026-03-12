@@ -1,68 +1,102 @@
-# Task Manager
+# Laravel Task Manager
 
-Task Manager is a Laravel 12 starter project for a simple task management application.
+## Project Overview
 
-This repository currently includes the foundational structure only:
+Laravel Task Manager is a simple task management system built with Laravel and Bootstrap 4. It provides a straightforward interface for managing tasks through core CRUD operations, allowing users to create, view, update, and delete tasks from a centralized dashboard.
 
-- `Task` Eloquent model
-- `tasks` table migration
-- Basic task routes
-- Project documentation
+The application is designed to keep task tracking lightweight and easy to maintain. It supports task status management and is structured to accommodate task search and list filtering as part of the overall workflow.
 
-## Task Schema
+## Features
 
-The `tasks` table contains:
+- Create tasks with title, description, and status
+- View a list of tasks
+- Edit existing tasks
+- Delete tasks with confirmation
+- Mark tasks as Completed or Pending
+- Pagination for task list
+- Search tasks by title
+- Form validation
+- Bootstrap UI styling
 
-- `id`
-- `title` (`string`, required)
-- `description` (`text`, nullable)
-- `status` (`enum`: `Pending`, `Completed`)
-- `created_at`
-- `updated_at`
+## Setup Instructions
 
-## Project Structure
+1. Clone the repository:
 
-- `app/Models/Task.php`: Task domain model
-- `database/migrations/2026_03_13_000000_create_tasks_table.php`: Database schema for tasks
-- `routes/web.php`: Basic task-related web routes
+```bash
+git clone <repository-url>
+cd laratas
+```
 
-## Routes
-
-The current routes are placeholders for the task feature:
-
-- `GET /` redirects to `GET /tasks`
-- `GET /tasks` returns a basic task index placeholder response
-- `GET /tasks/create` returns a basic task creation placeholder response
-
-## Getting Started
-
-1. Install PHP dependencies:
+2. Install PHP dependencies with Composer:
 
 ```bash
 composer install
 ```
 
-2. Configure your environment:
+3. Create your environment file and generate the application key:
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-3. Update your database settings in `.env`.
+## Database Setup
 
-4. Run the migrations:
+Update the `.env` file with your local database credentials. At minimum, configure the following values:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=task_manager
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+After the database configuration is complete, run the migrations:
 
 ```bash
 php artisan migrate
 ```
 
-5. Start the development server:
+This will create the required tables for the application, including the `tasks` table used by the task manager.
+
+## Running the Application
+
+Start the local development server with:
 
 ```bash
 php artisan serve
 ```
 
-## Notes
+Once the server is running, open the local URL shown in your terminal, typically:
 
-CRUD controllers, request validation, views, factories, seeders, and tests have not been added yet.
+```text
+http://127.0.0.1:8000
+```
+
+## Technologies Used
+
+- Laravel
+- PHP
+- Bootstrap 4
+- MySQL
+- Eloquent ORM
+- Git
+
+## Assumptions
+
+- The project is intended to run in a standard local Laravel development environment with PHP, Composer, and MySQL installed.
+- Bootstrap 4 is used for the UI layer through CDN-based styling in the Blade views.
+- Task status is limited to two valid values: `Pending` and `Completed`.
+- Search is part of the expected application scope and is assumed to be implemented through task title filtering in the task list workflow.
+- The application is designed for basic single-project task management and does not currently assume multi-user authentication or authorization requirements.
+
+## Bonus Features
+
+- Search functionality for tasks
+- Pagination for task list
+
+## Submission Notes
+
+This project is structured to follow Laravel conventions for models, migrations, controllers, routes, and Blade templates. The codebase is intentionally simple and suitable for extension with additional features such as authentication, task categories, due dates, and richer filtering in future iterations.

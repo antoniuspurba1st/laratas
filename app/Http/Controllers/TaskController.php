@@ -9,12 +9,21 @@ use Illuminate\View\View;
 
 class TaskController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = $request->query('search');
+
+        $tasks = Task::query()
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->appends(['search' => $search]);
+
         return view('tasks.index', [
-            'tasks' => Task::query()
-                ->latest()
-                ->paginate(10),
+            'tasks' => $tasks,
+            'search' => $search,
         ]);
     }
 
