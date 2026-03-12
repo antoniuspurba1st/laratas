@@ -45,7 +45,7 @@
                                     <td>{{ $task->title }}</td>
                                     <td>{{ $task->created_at?->format('M d, Y H:i') ?? '-' }}</td>
                                     <td>
-                                        <span class="badge badge-{{ $task->status === \App\Models\Task::STATUS_COMPLETED ? 'success' : 'secondary' }}">
+                                        <span class="badge badge-{{ $task->status === \App\Models\Task::STATUS_COMPLETED ? 'success' : 'warning' }}">
                                             {{ $task->status }}
                                         </span>
                                     </td>
@@ -69,6 +69,12 @@
                 </div>
             </div>
         </div>
+
+        @if ($tasks->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $tasks->links() }}
+            </div>
+        @endif
     </div>
 </body>
 </html>

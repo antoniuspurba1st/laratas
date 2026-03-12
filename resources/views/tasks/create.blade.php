@@ -43,9 +43,12 @@
                             type="text"
                             name="title"
                             value="{{ old('title') }}"
-                            class="form-control"
+                            class="form-control @error('title') is-invalid @enderror"
                             required
                         >
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -54,19 +57,25 @@
                             id="description"
                             name="description"
                             rows="5"
-                            class="form-control"
+                            class="form-control @error('description') is-invalid @enderror"
                         >{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select id="status" name="status" class="form-control" required>
+                        <select id="status" name="status" class="form-control @error('status') is-invalid @enderror" required>
                             @foreach ($statuses as $status)
                                 <option value="{{ $status }}" @selected(old('status', \App\Models\Task::STATUS_PENDING) === $status)>
                                     {{ $status }}
                                 </option>
                             @endforeach
                         </select>
+                        @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Task</button>

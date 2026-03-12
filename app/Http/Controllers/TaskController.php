@@ -12,7 +12,9 @@ class TaskController extends Controller
     public function index(): View
     {
         return view('tasks.index', [
-            'tasks' => Task::query()->latest()->get(),
+            'tasks' => Task::query()
+                ->latest()
+                ->paginate(10),
         ]);
     }
 
