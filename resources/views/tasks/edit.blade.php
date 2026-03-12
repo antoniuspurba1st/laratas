@@ -4,68 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Task</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-        }
-
-        form {
-            display: grid;
-            gap: 1rem;
-            max-width: 36rem;
-        }
-
-        label {
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .errors {
-            color: #b91c1c;
-        }
-    </style>
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        crossorigin="anonymous"
+    >
 </head>
-<body>
-    <h1>Edit Task</h1>
-    <p><a href="{{ route('tasks.index') }}">Back to tasks</a></p>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 mb-1">Edit Task</h1>
+                <p class="text-muted mb-0">Update the selected task.</p>
+            </div>
 
-    @if ($errors->any())
-        <div class="errors">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <a href="{{ route('tasks.index') }}" class="btn btn-outline-secondary">Back to Tasks</a>
         </div>
-    @endif
 
-    <form method="POST" action="{{ route('tasks.update', $task) }}">
-        @csrf
-        @method('PUT')
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul class="mb-0 pl-3">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <label>
-            Title
-            <input type="text" name="title" value="{{ old('title', $task->title) }}" required>
-        </label>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="POST" action="{{ route('tasks.update', $task) }}">
+                    @csrf
+                    @method('PUT')
 
-        <label>
-            Description
-            <textarea name="description" rows="5">{{ old('description', $task->description) }}</textarea>
-        </label>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input
+                            id="title"
+                            type="text"
+                            name="title"
+                            value="{{ old('title', $task->title) }}"
+                            class="form-control"
+                            required
+                        >
+                    </div>
 
-        <label>
-            Status
-            <select name="status" required>
-                @foreach ($statuses as $status)
-                    <option value="{{ $status }}" @selected(old('status', $task->status) === $status)>
-                        {{ $status }}
-                    </option>
-                @endforeach
-            </select>
-        </label>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="5"
+                            class="form-control"
+                        >{{ old('description', $task->description) }}</textarea>
+                    </div>
 
-        <button type="submit">Update Task</button>
-    </form>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="form-control" required>
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status }}" @selected(old('status', $task->status) === $status)>
+                                    {{ $status }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
