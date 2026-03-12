@@ -17,6 +17,7 @@ The application is designed to keep task tracking lightweight and easy to mainta
 - Search tasks by title
 - Form validation
 - Bootstrap UI styling
+- Feature tests for task manager flows
 
 ## Setup Instructions
 
@@ -75,6 +76,14 @@ Once the server is running, open the local URL shown in your terminal, typically
 http://127.0.0.1:8000
 ```
 
+## Running Tests
+
+Run the automated test suite with:
+
+```bash
+php artisan test
+```
+
 ## Technologies Used
 
 - Laravel
@@ -96,6 +105,7 @@ http://127.0.0.1:8000
 
 - Search functionality for tasks
 - Pagination for task list
+- Automated feature test coverage
 
 ## Submission Notes
 
